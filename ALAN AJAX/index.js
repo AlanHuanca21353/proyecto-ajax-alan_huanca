@@ -82,13 +82,13 @@ function solicitudAJAX(params) {
               `" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">` +
-              nombre +
+             "nombre del pokemon: " + nombre +
               `</h5>
       <p class="card-text"></p>
     </div>
     <div class="card-body">
       <h5 class="card-title">` +
-              vida +
+             "vida del pokemon: " + vida +
               `</h5>
       <p class="card-text"></p>
     </div>
