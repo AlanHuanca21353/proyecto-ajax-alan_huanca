@@ -12,8 +12,8 @@ function solicitudAJAX(params) {
             buscarPorURL(json.results[i].url);
           }
         } else {
-          alert("Error Code: " + objXMLHttpRequest.status);
-          alert("Error Message: " + objXMLHttpRequest.statusText);
+          alert("no hay pokemones: " + objXMLHttpRequest.status);
+          alert("no hay pokemones: " + objXMLHttpRequest.statusText);
         }
       }
     };
@@ -32,6 +32,11 @@ function solicitudAJAX(params) {
           let nombre = json.name;
           let uriImg = json.sprites.other.home.front_default;
           let vida = json.stats[0].hp;
+          let ataque = json.stats[1].attack;
+          let defensa = json.stats[2].attack;
+          let ataque_especial = json.stats[3].attackspecial;
+          let defensa_especial = json.stats[4].defensaespecial;
+          let velocidad = json.stats[5].speed;
           let html =
             `<div class="card" style="width: 18rem;">
     <img src="` +
@@ -48,8 +53,8 @@ function solicitudAJAX(params) {
           div.appendChild(html);
           console.log(div);
         } else {
-          alert("Error Code: " + objXMLHttpRequest.status);
-          alert("Error Message: " + objXMLHttpRequest.statusText);
+          alert("no hay pokemones: " + objXMLHttpRequest.status);
+          alert("no hay pokemones: " + objXMLHttpRequest.statusText);
         }
       }
     };
@@ -60,51 +65,75 @@ function solicitudAJAX(params) {
   function buscar() {
     let tarjetas = document.querySelector("#ConteinerCard");
     var data = document.querySelector("#nPokemon").data;
-    var busqueda = document.querySelector("#nPokemon").value - 1;
-    var url = data.results[busqueda].url;
+    var busqueda = document.querySelector("#nPokemon").value;
   
-    if (busqueda >= 0) {
+    if(busqueda <= 0 || busqueda > 905){
+      alert("Debe ingresar una ID entre 0 y 905");
+    }
+    
+    else if (busqueda >  0) {
       var objXMLHttpRequest = new XMLHttpRequest();
+      var url = data.results[busqueda - 1].url;
   
       objXMLHttpRequest.onreadystatechange = function () {
         if (objXMLHttpRequest.readyState === 4) {
           if (objXMLHttpRequest.status === 200) {
             let json = JSON.parse(objXMLHttpRequest.responseText);
-            let nombre = json.name;
+            let nombre = json.species.name;
             let uriImg = json.sprites.other.home.front_default;
             let vida = json.stats[0].base_stat;
             console.log(vida);
+            let ataque = json.stats[1].base_stat;
+            console.log(ataque);
+            let defensa= json.stats[1].base_stat;
+            console.log(defensa);
+            let ataque_especial = json.stats[3].base_stat;
+            console.log(ataque_especial);
+            let defensa_especial = json.stats[4].base_stat;
+            console.log(defensa_especial);
+            let speed = json.stats[5].base_stat;
+            console.log(speed);
             console.log(json);
             let html =
-              `<div class="card" style="width: 18rem;">
+              `<div class="card" style="width: 25rem;">
     <img src="` +
               uriImg +
               `" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">` +
-             "nombre del pokemon: " + nombre +
+             "NOMBRE: " + nombre +
               `</h5>
       <p class="card-text"></p>
     </div>
     <div class="card-body">
       <h5 class="card-title">` +
-             "vida del pokemon: " + vida +
-              `</h5>
-      <p class="card-text"></p>
-    </div>
+             "❤️  VIDA : " + vida +
+           "⚔️ ATAQUE: " + ataque +
+            `</h5>
+    <p class="card-text"></p>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">` +
+           "⚔️🔥 ATQ ESP: " + ataque_especial +
+           " 🛡️🔥DEF ESP: " + defensa_especial +
+            `</h5>
+    <p class="card-text"></p>
+  </div>
+  <div class="card-body">
+  <h5 class="card-title">` +
+         "✨VELOCIDAD: " + speed +
+         " 🛡️DEF: " + defensa +
 
+          `</h5>
+  <p class="card-text"></p>
+</div>
   </div>`;
             tarjetas.innerHTML = html;
-          } else {
-            alert("Error Code: " + objXMLHttpRequest.status);
-            alert("Error Message: " + objXMLHttpRequest.statusText);
-          }
+          } 
         }
       };
       objXMLHttpRequest.open("GET", url);
       objXMLHttpRequest.send();
-    } else {
-      alert("debe ingresar un valor entre 0 y 951");
-    }
+    } 
   }
   

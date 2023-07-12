@@ -3,7 +3,7 @@ body {
     margin-right: 5%;
     padding: 0%;
     text-align: center;
-    background-color: rgb(32, 32, 88);
+    background-color: rgb(26, 26, 102);
   }
   
   .container {
@@ -11,10 +11,11 @@ body {
     margin-right: auto;
     margin-top: 5%;
     margin-bottom: 12%;
+  
   }
 
   #ConteinerCard{
     display: flex;
-    justify-content: center;
+    justify-content: center; 
   }
-  
+ 
